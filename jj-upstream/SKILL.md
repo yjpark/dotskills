@@ -32,7 +32,7 @@ After running, report the list of generated `.patch` files in both directories.
 
 ### Step 3: summary
 
-Read every `.patch` file from the upstream patches folder (created in Step 2). Write a `summary.md` in the same folder structured as a review document — the reader must be able to approve or reject each patch from this file alone, without opening raw diffs.
+Read every `.patch` file from the upstream patches folder (created in Step 2). Write a `<folder-name>-summary.md` in the same folder structured as a review document — the reader must be able to approve or reject each patch from this file alone, without opening raw diffs.
 
 **Document structure:**
 
