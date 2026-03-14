@@ -45,10 +45,25 @@ first, then follow the thread.
 One question at a time unless the user clearly prefers rapid-fire. Match their energy
 and density.
 
+## Establishing the frame
+
+**Before diving into discussion**, establish what type of thing is being clarified.
+
+- If the user's input already implies a type (e.g., "clarify this bug", "I want to
+  build a feature for..."), confirm it briefly and proceed.
+- If the type isn't clear from the input, ask the user to choose: **task**, **bug**,
+  **feature**, **decision**, **doc**, or **idea**.
+- Make clear that `idea` is the explicit choice for "I just want to think something
+  through without a predefined frame" — open-ended exploration, early-stage thinking,
+  or anything that doesn't fit the other types.
+- Once the type is agreed, load the matching template (if any, from context providers)
+  and use the corresponding mental model below to guide the conversation.
+
 ## Knowing what "clear" looks like
 
-Different types of things are "done" when different questions are answered. Use these
-as mental models to sense what's still missing — not as checklists to impose.
+These mental models activate once the type is established in the framing step.
+Different types are "done" when different questions are answered. Use these as
+mental models to sense what's still missing — not as checklists to impose.
 
 **Something to build** (task, feature): What problem does it solve? What does "done"
 look like? What's out of scope? Any constraints or dependencies?
@@ -86,13 +101,16 @@ as a structural guide. Templates define **sections that should be present** in t
 output — the content within each section is free-form. Think of templates as defining
 the skeleton; the conversation fills in the flesh.
 
+**Also read `PROVIDER.md`** in the provider directory if it exists. It may contain
+clarification-specific guidance (e.g., valid type values, required fields, constraints).
+Look for a `## Clarifying` section or similar. Use this to inform your conversation,
+not to override the built-in mental models.
+
 **If no context providers exist**, or no matching template is found, fall back to
 the built-in mental models above. The skill works perfectly fine without any providers.
 
-When checking for templates, determine the type early in the conversation (or infer
-it from context) so you can load the right template. If the type isn't clear, don't
-block on it — start the conversation and figure it out as you go. You can always
-check for a template later before producing the output.
+Once the type is established (see "Establishing the frame"), immediately check for
+a matching template and load it to guide the conversation.
 
 ## Knowing when to wrap up
 
@@ -156,3 +174,22 @@ anyway, respect that — but stay aware that you're outside this skill's scope.
 
 If the user wants the clarified output tracked or organized somewhere, tell them the
 file is ready and suggest they use `ctx-organize` or their context management workflow.
+
+## After writing the file
+
+After the clarified file has been written, check whether to auto-organize:
+
+1. **Identify the provider**: look at the `provider` field in the file's frontmatter.
+   If it's absent or empty, skip auto-organize.
+
+2. **Check the provider config**: if a provider was identified, read
+   `.claude/ctx/<provider>/PROVIDER.md`. Parse its YAML frontmatter for
+   `auto_organize: true`.
+
+3. **If `auto_organize: true`**:
+   - Tell the user: "Organizing automatically via <provider>..."
+   - Invoke `/ctx-organize` on the file (pass the file path as the target).
+
+4. **If the flag is absent, false, or the provider file doesn't exist**:
+   - Behave as today: tell the user the file is ready and suggest they run
+     `/ctx-organize` if they want it tracked.
