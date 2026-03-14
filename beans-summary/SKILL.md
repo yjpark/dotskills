@@ -32,13 +32,13 @@ jj log --no-pager -r 'description("<target_date>")' -T 'change_id ++ "\n"'
 
 Run:
 ```
-jj diff --no-pager -r <revision> --summary -- 'beans/yj-*'
+jj diff --no-pager -r <revision> --summary -- 'beans/<prefix>*'
 ```
 
 This returns lines like:
 ```
-A beans/yj-k6pf--learn-the-permission-config-for-claude-code.md
-M beans/yj-b57l--replace-submodules-with-josh.md
+A beans/<prefix>k6pf--learn-the-permission-config-for-claude-code.md
+M beans/<prefix>b57l--replace-submodules-with-josh.md
 ```
 
 - `A` = added file, `M` = modified file
@@ -48,7 +48,7 @@ M beans/yj-b57l--replace-submodules-with-josh.md
 
 Run:
 ```
-jj diff --no-pager -r <revision> -- 'beans/yj-*'
+jj diff --no-pager -r <revision> -- 'beans/<prefix>*'
 ```
 
 ## Diff Parsing
@@ -57,7 +57,7 @@ jj diff --no-pager -r <revision> -- 'beans/yj-*'
 
 The diff shows the full file content after `Added regular file <path>:`. Parse the YAML frontmatter to extract: `title`, `status`, `type`, `priority`, `tags`, `created_at`.
 
-The bean ID is found in the frontmatter comment line: `# yj-XXXX` (the line immediately after `---`).
+The bean ID is found in the frontmatter comment line: `# <prefix>XXXX` (the line immediately after `---`).
 
 ### Modified files (M)
 
@@ -107,16 +107,16 @@ Generate markdown with `# Tasks` as the top-level heading. Only include sections
 
 ### Bean ID extraction
 
-Extract the bean ID (`yj-XXXX`) from:
-1. The frontmatter comment line `# yj-XXXX` in the diff content, OR
-2. The filename itself: `beans/yj-XXXX--slug.md` → `yj-XXXX`
+Extract the bean ID (`<prefix>XXXX`) from:
+1. The frontmatter comment line `# <prefix>XXXX` in the diff content, OR
+2. The filename itself: `beans/<prefix>XXXX--slug.md` → `<prefix>XXXX`
 
 ### Wikilink format
 
 For each bean, construct the Obsidian wikilink from the file path:
 - Remove the `.md` extension
 - Use the bean ID as display text
-- Format: `[[beans/yj-XXXX--slug|yj-XXXX]]`
+- Format: `[[beans/<prefix>XXXX--slug|<prefix>XXXX]]`
 
 ### Section templates
 
@@ -124,17 +124,17 @@ For each bean, construct the Obsidian wikilink from the file path:
 # Tasks
 
 ## Completed (N)
-- [[beans/yj-8bc3--finish-the-upstream-patch-exporter|yj-8bc3]] Finish the upstream patch exporter `flakes` [high] *(same-day)*
-- [[beans/yj-oi8t--generate-daily-summary-from-backlogmd-tasks|yj-oi8t]] Generate daily summary from backlog tasks `skills` [normal]
+- [[beans/<prefix>8bc3--finish-the-upstream-patch-exporter|<prefix>8bc3]] Finish the upstream patch exporter `flakes` [high] *(same-day)*
+- [[beans/<prefix>oi8t--generate-daily-summary-from-backlogmd-tasks|<prefix>oi8t]] Generate daily summary from backlog tasks `skills` [normal]
 
 ## New Beans (N)
-- [[beans/yj-k6pf--learn-the-permission-config-for-claude-code|yj-k6pf]] Learn the permission config for Claude Code [high] -> todo
+- [[beans/<prefix>k6pf--learn-the-permission-config-for-claude-code|<prefix>k6pf]] Learn the permission config for Claude Code [high] -> todo
 
 ## Status Changes (N)
-- [[beans/yj-27qa--setup-a-proper-slack-mcp-to-manage-messages-with-a|yj-27qa]] Setup a proper Slack MCP: draft -> todo
+- [[beans/<prefix>27qa--setup-a-proper-slack-mcp-to-manage-messages-with-a|<prefix>27qa]] Setup a proper Slack MCP: draft -> todo
 
 ## Other Updates (N)
-- [[beans/yj-b57l--replace-submodules-with-josh|yj-b57l]] Replace submodules with Josh -- tags: tools -> tooling
+- [[beans/<prefix>b57l--replace-submodules-with-josh|<prefix>b57l]] Replace submodules with Josh -- tags: tools -> tooling
 ```
 
 ### Item format details
