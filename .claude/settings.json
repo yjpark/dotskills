@@ -9,6 +9,17 @@
     ],
     "PreCompact": [
       { "hooks": [{ "type": "command", "command": "beans prime" }] }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Plan mode exited. Save the approved plan by invoking /ctx-plan now.'"
+          }
+        ]
+      }
     ]
   }
 }
