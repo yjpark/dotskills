@@ -1,10 +1,11 @@
 ---
 # skills-dh7q
 title: Preview mode for ctx-organize
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-03-14T08:01:35Z
-updated_at: 2026-03-14T08:01:35Z
+updated_at: 2026-03-14T08:13:13Z
 ---
 
 ## What
@@ -38,3 +39,14 @@ ctx-organize can be triggered automatically (e.g., via `auto_organize` in a prov
 
 - File-based preview output (terminal only).
 - Interactive confirmation prompt (user runs `--go` explicitly).
+
+## Summary of Changes
+
+Updated  to add preview mode support:
+
+- Added **Arguments** section documenting the  flag
+- Updated **Core Flow** step 3 to check  in PROVIDER.md frontmatter
+- Preview mode prints a dry-run summary (provider action, type, title, priority, body excerpt)
+- Preview mode prints instruction to run `/ctx-organize --go <file>` to proceed
+- Preview only activates when  AND  is not passed
+- Default behavior (no flag) remains execute-immediately when provider has no  setting

@@ -27,12 +27,24 @@ When triggered, determine which clarified file to organize:
 3. **Multiple files in `clarified/`** — list them and ask the user which to organize.
 4. **No files in `clarified/`** — tell the user there's nothing to organize.
 
+## Arguments
+
+- `--go` — execute immediately, skipping any provider-configured preview.
+
 ## Core Flow
 
 ```
 1. Read the clarified file (frontmatter + body)
 2. Extract provider, type, title from frontmatter
 3. Load .claude/ctx/<provider>/PROVIDER.md
+   - Check frontmatter for preview_organize: true
+   - If preview_organize: true AND --go was NOT passed:
+     - Print a preview summary:
+       - Provider action (e.g., "Would create bean")
+       - Key fields: type, title, priority
+       - Truncated body excerpt (first ~200 chars)
+     - Print: "Run `/ctx-organize --go <file>` to execute."
+     - Stop. Do not create beans, move files, or modify anything.
 4. Follow the "## Organizing" section in PROVIDER.md
 5. Move the file: clarified/<slug>.md → organized/<slug>.md
 6. Update frontmatter: status: clarified → status: organized
