@@ -237,10 +237,3 @@ After the clarified file has been written, check whether to auto-organize:
    - Behave as today: tell the user the file is ready and suggest they run
      `/ctx-organize` if they want it tracked.
 
-## End of session
-
-After the clarified file has been written (and auto-organize handled if applicable),
-discard any plan mode output generated during this session. Do **not** invoke
-`ctx-plan` and do **not** save any plan produced during this clarify conversation.
-Clarify sessions are exploratory — their plans are incidental and should not be
-persisted as implementation plans.

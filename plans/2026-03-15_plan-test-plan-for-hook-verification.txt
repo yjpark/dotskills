@@ -1,0 +1,13 @@
+# Plan: Test plan for hook verification
+
+## Context
+This is a dummy plan created solely to test that the `save-plan.sh` PostToolUse hook correctly copies the plan file from `~/.claude/plans/` to the project's `plans/` directory.
+
+## Steps
+1. Approve this plan
+2. Check that `plans/2026-03-15_test-plan-for-hook-verification.txt` appears
+3. Verify its content matches this file
+
+## Verification
+- Run `ls plans/` and confirm the new file exists
+- Run `cat plans/2026-03-15_test-plan-for-hook-verification.txt` and confirm content
