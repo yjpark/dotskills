@@ -19,6 +19,14 @@ Use this skill when:
 
 Do **not** use before coding. Plan mode already handles the planning step — this skill only saves the output.
 
+### Guard: skip during clarify sessions
+
+Before proceeding, check whether this conversation already produced a `clarified/` file (via `ctx-clarify` or similar). If a file in `clarified/` with today's date was written earlier in this session and its `type` is **not** `plan`, then this plan is a side effect of a clarify session. Do **not** save it — instead, tell the user:
+
+> "Skipping plan save — this plan was a side effect of a clarify session."
+
+Then stop. Do not proceed to the workflow steps.
+
 ## Workflow
 
 ### 1. Locate the plan file

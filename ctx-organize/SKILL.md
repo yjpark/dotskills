@@ -45,10 +45,13 @@ When triggered, determine which clarified file to organize:
        - Truncated body excerpt (first ~200 chars)
      - Print: "Run `/ctx-organize --go <file>` to execute."
      - Stop. Do not create beans, move files, or modify anything.
-4. Follow the "## Organizing" section in PROVIDER.md
-5. Move the file: clarified/<slug>.md → organized/<slug>.md
-6. Update frontmatter: status: clarified → status: organized
-7. Add any provider metadata (e.g., bean_id) to the organized file's frontmatter
+4. Pass the full frontmatter (including any `source` field) to the provider.
+   The provider's Organizing section handles both new-item creation and
+   existing-item updates based on its own `source` URI scheme.
+5. Follow the "## Organizing" section in PROVIDER.md
+6. Move the file: clarified/<slug>.md → organized/<slug>.md
+7. Update frontmatter: status: clarified → status: organized
+8. Add any provider metadata (e.g., bean_id) to the organized file's frontmatter
 ```
 
 ## Reading Provider Instructions

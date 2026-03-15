@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Plan mode exited. Save the approved plan by invoking /ctx-plan now.'"
+            "command": "echo 'Plan mode exited. If this was a ctx-clarify session, do NOT save the plan. Otherwise, save the approved plan by invoking /ctx-plan now.'"
           }
         ]
       }

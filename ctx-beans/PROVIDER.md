@@ -22,6 +22,31 @@ Each template in `templates/<type>.md` describes the sections a clarified docume
 
 Templates are structural guides — they define what sections belong in a document, not how to fill them in. Sections can be omitted if not applicable, and extra sections can be added when needed.
 
+## Clarifying
+
+Instructions for `ctx-clarify` when the provider is `beans`.
+
+### Searching for existing items
+
+When the user's input looks like a reference to an existing item, search with:
+
+```bash
+beans list --json -S "<keywords>"
+```
+
+Results:
+- **One clear match** — show title, type, status. Confirm with user.
+- **Multiple candidates** — show numbered list (title, type, status). User picks.
+- **No match** — fall through to new-item flow.
+
+### Source field
+
+When clarifying an existing bean, set in the output frontmatter:
+
+```yaml
+source: beans://<bean-id>
+```
+
 ## Organizing
 
 Instructions for `ctx-organize` when the clarified file has `provider: beans`.
@@ -33,6 +58,21 @@ Instructions for `ctx-organize` when the clarified file has `provider: beans`.
 | `type`            | `-t <type>`   | Map directly: `task`, `bug`, `feature`, `epic`, `milestone` |
 | `title`           | first arg     | Use as the bean title |
 | `priority`        | `-p <priority>` | Optional; omit if not in frontmatter |
+
+### Updating an existing bean
+
+If the clarified file has `source: beans://<bean-id>` in frontmatter:
+
+1. Extract the bean ID from the URI (e.g., `beans://skills-9pqv` → `skills-9pqv`).
+2. Confirm with the user: "This will update bean `<bean-id>`: _[title]_. Proceed?"
+3. Update the bean's body with the clarified content using
+   `beans update <bean-id> --body-replace-old ... --body-replace-new ...`,
+   or append if the content is entirely new.
+4. Do not change bean metadata (type, status, priority) unless the user requests it.
+5. Skip the "Creating the bean" step below.
+6. Add `bean_id: <bean-id>` to the organized file's frontmatter.
+
+If `source` is absent, proceed with creating a new bean as below.
 
 ### Creating the bean
 

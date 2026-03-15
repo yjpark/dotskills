@@ -1,10 +1,11 @@
 ---
 # skills-9pqv
 title: Support clarifying existing items in ctx-clarify
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-03-15T06:29:13Z
-updated_at: 2026-03-15T06:29:13Z
+updated_at: 2026-03-15T06:59:25Z
 ---
 
 ## Problem
@@ -68,3 +69,8 @@ enriched content, rather than creating a new one.
 - The agent always confirms the matched bean with the user before proceeding — no
   silent assumptions.
 - Updating the bean itself is handled by `ctx-organize`, not by ctx-clarify.
+
+## Summary of Changes
+
+- Updated `ctx-clarify/SKILL.md`: added **Detecting existing items** section under **Session start** that fuzzy-searches beans on invocation, handles one/many/no-match flows, skips type establishment for confirmed existing beans, and adds `source: beans://<bean-id>` to the output frontmatter.
+- Updated `ctx-organize/SKILL.md`: added **Existing Item Updates** section that detects `source: beans://` in frontmatter and updates the existing bean instead of creating a new one.

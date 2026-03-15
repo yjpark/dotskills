@@ -183,6 +183,41 @@ When the skill is invoked, check the active model. If it is `opusplan` and the s
 
 This is non-blocking — proceed regardless of whether the user acts on it.
 
+### Detecting existing items
+
+After the model nudge (if any), check whether the user's input looks like a reference to
+an existing item — a few keywords or a short phrase, not a new idea being introduced for
+the first time.
+
+Do **not** search if the user is clearly introducing a new idea from scratch. If no
+provider has been identified yet (type not established), skip this check and fall through
+to the normal new-item flow.
+
+**If a provider is known**, read `.claude/ctx/<provider>/PROVIDER.md` and look for a
+`## Clarifying` section with existing-item search instructions. If found:
+
+1. Follow the provider's search instructions to find matching items.
+2. **One clear match** — confirm with the user (title, type, status). On confirmation,
+   proceed to **Existing item flow** below.
+3. **Multiple candidates** — show a numbered list. User picks one or says "none". On
+   selection, proceed to **Existing item flow**.
+4. **No match** — say no existing item was found and fall through to the normal new-item flow.
+
+If the provider has no `## Clarifying` section, fall through to the normal new-item flow.
+
+**Existing item flow** (triggered only when the user confirms a match):
+
+1. **Skip type establishment** — the type is already known from the existing item's metadata.
+2. Show the user the item's full current description/body as a starting point.
+3. Confirm with the user: is there context you'd like to add, or areas you'd like to
+   explore further? Use the existing content to anchor the conversation rather than
+   starting from scratch.
+4. The clarification conversation then continues using the same mental models as normal.
+
+When producing the output file for an existing item, set the `source` field in frontmatter
+as instructed by the provider's `## Clarifying` section. This links the clarified output
+back to the source item so that `ctx-organize` can update it rather than create a new one.
+
 ## After writing the file
 
 After the clarified file has been written, check whether to auto-organize:
