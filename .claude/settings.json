@@ -21,5 +21,12 @@
         ]
       }
     ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(grep: *)",
+      "Bash(beans list:*)",
+      "Bash(beans show:*)"
+    ]
   }
 }

@@ -175,6 +175,14 @@ anyway, respect that — but stay aware that you're outside this skill's scope.
 If the user wants the clarified output tracked or organized somewhere, tell them the
 file is ready and suggest they use `ctx-organize` or their context management workflow.
 
+## Session start
+
+When the skill is invoked, check the active model. If it is `opusplan` and the session is not already in plan mode, add a soft nudge:
+
+> "You're on `opusplan`. Consider entering plan mode (`/plan`) to use opus for this clarification session."
+
+This is non-blocking — proceed regardless of whether the user acts on it.
+
 ## After writing the file
 
 After the clarified file has been written, check whether to auto-organize:
@@ -193,3 +201,11 @@ After the clarified file has been written, check whether to auto-organize:
 4. **If the flag is absent, false, or the provider file doesn't exist**:
    - Behave as today: tell the user the file is ready and suggest they run
      `/ctx-organize` if they want it tracked.
+
+## End of session
+
+After the clarified file has been written (and auto-organize handled if applicable),
+discard any plan mode output generated during this session. Do **not** invoke
+`ctx-plan` and do **not** save any plan produced during this clarify conversation.
+Clarify sessions are exploratory — their plans are incidental and should not be
+persisted as implementation plans.
