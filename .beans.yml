@@ -5,7 +5,7 @@ project:
     name: skills
 beans:
     # Directory where bean files are stored
-    path: beans
+    path: .beans
     # Prefix for bean IDs (e.g., "myproject-abc1")
     prefix: skills-
     # Length of the random ID suffix
@@ -16,7 +16,7 @@ beans:
     default_type: task
 worktree:
     # Git ref to use as the base for new worktree branches (default: main)
-    base_ref: main
+    base_ref: dev
 agent:
     # Enable agent functionality in the web UI (true, false)
     enabled: true
